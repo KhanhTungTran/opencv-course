@@ -3,6 +3,8 @@
 import cv2 as cv
 import matplotlib.pyplot as plt
 
+#NOTE: Color spaces: BGR, Grayscale, HSV, ...
+
 img = cv.imread('../Resources/Photos/park.jpg')
 cv.imshow('Park', img)
 
@@ -13,7 +15,7 @@ cv.imshow('Park', img)
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 cv.imshow('Gray', gray)
 
-# BGR to HSV
+# BGR to HSV (Hue Saturation Value)
 hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 cv.imshow('HSV', hsv)
 
@@ -25,7 +27,11 @@ cv.imshow('LAB', lab)
 rgb = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 cv.imshow('RGB', rgb)
 
-# HSV to BGR
+# matplotlib default is rgb
+plt.imshow(rgb)
+plt.show()
+
+# LAB to BGR
 lab_bgr = cv.cvtColor(lab, cv.COLOR_LAB2BGR)
 cv.imshow('LAB --> BGR', lab_bgr)
 

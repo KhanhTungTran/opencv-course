@@ -10,10 +10,14 @@ blank = np.zeros(img.shape[:2], dtype='uint8')
 
 b,g,r = cv.split(img)
 
+# Those will be display as grayscale, showing the distribution of pixel intensity, lighter: more value
+cv.imshow('Blue', b)
+cv.imshow('Green', g)
+cv.imshow('Red', r)
+
 blue = cv.merge([b,blank,blank])
 green = cv.merge([blank,g,blank])
 red = cv.merge([blank,blank,r])
-
 
 cv.imshow('Blue', blue)
 cv.imshow('Green', green)
