@@ -3,6 +3,8 @@
 import cv2 as cv
 import numpy as np
 
+# NOTE: Gradients as edges in programming perspective
+
 img = cv.imread('../Resources/Photos/park.jpg')
 cv.imshow('Park', img)
 
@@ -23,6 +25,7 @@ cv.imshow('Sobel X', sobelx)
 cv.imshow('Sobel Y', sobely)
 cv.imshow('Combined Sobel', combined_sobel)
 
+# Canny is more high stage, one of its stage uses sobel
 canny = cv.Canny(gray, 150, 175)
 cv.imshow('Canny', canny)
 cv.waitKey(0)
