@@ -16,7 +16,7 @@ import sklearn.model_selection as skm
 
 
 IMG_SIZE = (80,80)
-channels = 1
+channels = 1    # Grayscale
 char_path = r'../input/the-simpsons-characters-dataset/simpsons_dataset'
 
 # Creating a character dictionary, sorting it in descending order
@@ -26,23 +26,23 @@ for char in os.listdir(char_path):
 
 # Sort in descending order
 char_dict = caer.sort_dict(char_dict, descending=True)
-char_dict
+print(char_dict)
 
 #  Getting the first 10 categories with the most number of images
 characters = []
 count = 0
 for i in char_dict:
-    characters.append(i[0])
+    characters.append(i[0]) # i[0] is key, i[1] is value
     count += 1
     if count >= 10:
         break
-characters
+print(characters)
 
 # Create the training data
 train = caer.preprocess_from_dir(char_path, characters, channels=channels, IMG_SIZE=IMG_SIZE, isShuffle=True)
 
 # Number of training samples
-len(train)
+print(len(train))
 
 # Visualizing the data (OpenCV doesn't display well in Jupyter notebooks)
 plt.figure(figsize=(30,30))
@@ -53,7 +53,7 @@ plt.show()
 featureSet, labels = caer.sep_train(train, IMG_SIZE=IMG_SIZE)
 
 
-# Normalize the featureSet ==> (0,1)
+# Normalize the featureSet ==> (0,1) => help launch the features much faster
 featureSet = caer.normalize(featureSet)
 # Converting numerical labels to binary class vectors
 labels = to_categorical(labels, len(characters))
@@ -88,11 +88,9 @@ datagen = canaro.generators.imageDataGenerator()
 train_gen = datagen.flow(x_train, y_train, batch_size=BATCH_SIZE)
 
 # Create our model (returns the compiled model)
-model = canaro.models.createSimpsonsModel(IMG_SIZE=IMG_SIZE, channels=channels, output_dim=len(characters), 
-                                         loss='binary_crossentropy', decay=1e-7, learning_rate=0.001, momentum=0.9,
-                                         nesterov=True)
+model = canaro.models.createSimpsonsModel(IMG_SIZE=IMG_SIZE, channels=channels, output_dim=len(characters),loss='binary_crossentropy', decay=1e-7, learning_rate=0.001, momentum=0.9,nesterov=True)
 
-model.summary()
+print(model.summary())
 
 # Training the model
 
